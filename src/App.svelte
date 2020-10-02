@@ -1,28 +1,25 @@
 <script>
-  export let name;
-</script>
+  let promise = getRandomNumber();
 
-<main>
-  <h1>Hello {name}!</h1>
-  <p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+  async function getRandomNumber() {
+    const res = await fetch(`tutorial/random-number`);
+    const text = await res.text();
 
-<style>
-  main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
-  }
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
-  }
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
+    if (res.ok) {
+      return text;
+    } else {
+      throw new Error(text);
     }
   }
-</style>
+
+  function handleClick() {
+    promise = getRandomNumber();
+  }
+</script>
+
+<button on:click={handleClick}>
+  generate random number
+</button>
+
+<!-- replace this element -->
+<p>{promise}</p>
