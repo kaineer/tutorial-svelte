@@ -2,14 +2,9 @@
   let promise = getRandomNumber();
 
   async function getRandomNumber() {
-    const res = await fetch(`tutorial/random-number`);
-    const text = await res.text();
-
-    if (res.ok) {
-      return text;
-    } else {
-      throw new Error(text);
-    }
+    return new Promise((resolve, reject) => {
+      setTimeout(() => resolve(Math.floor(Math.random() * 20 + 1)), 1000);
+    });
   }
 
   function handleClick() {
@@ -18,8 +13,14 @@
 </script>
 
 <button on:click={handleClick}>
-  generate random number
+  Генерируем случайное число
 </button>
 
 <!-- replace this element -->
-<p>{promise}</p>
+{#await promise}
+  <p>...ждём, когда закончится timeout</p>
+{:then number}
+  <p>Получаем число {number}</p>
+{:catch error}
+  <p style="color: red">{error.message}</p>
+{/await}
