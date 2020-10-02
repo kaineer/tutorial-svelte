@@ -18,6 +18,6 @@
   Удалить первый элемент
 </button>
 
-{#each things as thing}
+{#each things as thing (thing.id)}
   <Thing current={thing.color} />
 {/each}
