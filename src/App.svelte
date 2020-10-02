@@ -1,11 +1,13 @@
 <script>
   let count = 0;
 
+  import {pluralize} from './pluralize';
+
   const handleClick = () => {
     count += 1;
   };
 </script>
 
 <button on:click={handleClick}>
-  Clicked {count} {count === 1 ? 'time' : 'times'}
+  Кнопку нажали {count} {pluralize(count, 'раз', 'раза', 'раз')}
 </button>
