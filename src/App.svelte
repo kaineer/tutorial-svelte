@@ -2,6 +2,6 @@
   const handleClick = () => alert('clicked');
 </script>
 
-<button on:click={handleClick}>
+<button on:click|once={handleClick}>
   Click me
 </button>
