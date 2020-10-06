@@ -1,5 +1,12 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
+
   const sayHello = () => {
+    dispatch('message', {
+      text: 'Hello!'
+    });
   };
 </script>
 
