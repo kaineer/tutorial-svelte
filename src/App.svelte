@@ -14,6 +14,6 @@
   }
 </style>
 
-<div>
+<div on:mousemove={handleMousemove}>
   The mouse position is {m.x} x {m.y}
 </div>
