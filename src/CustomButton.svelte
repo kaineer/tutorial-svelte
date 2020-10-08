@@ -17,6 +17,6 @@
   }
 </style>
 
-<button>
+<button on:click>
   Click me
 </button>
