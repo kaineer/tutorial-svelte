@@ -1,28 +1,18 @@
 <script>
-  export let name;
+  let yes = false;
 </script>
 
-<main>
-  <h1>Hello {name}!</h1>
-  <p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+<label>
+  <input type=checkbox checked={yes}>
+  Yes! Send me regular email spam
+</label>
 
-<style>
-  main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
-  }
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
-  }
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
-  }
-</style>
+{#if yes}
+  <p>Thank you. We will bombard your inbox and sell your personal details.</p>
+{:else}
+  <p>You must opt in to continue. If you're not paying, you're the product.</p>
+{/if}
+
+<button disabled={!yes}>
+  Subscribe
+</button>
