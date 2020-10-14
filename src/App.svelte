@@ -1,28 +1,55 @@
 <script>
-  export let name;
+  let scoops = 1;
+  let flavours = ['Mint choc chip'];
+
+  function join(flavours) {
+    if (flavours.length === 1) return flavours[0];
+    return `${flavours.slice(0, -1).join(', ')} and ${flavours[flavours.length - 1]}`;
+  }
 </script>
 
-<main>
-  <h1>Hello {name}!</h1>
-  <p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+<h2>Size</h2>
 
-<style>
-  main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
-  }
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
-  }
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
-  }
-</style>
+<label>
+  <input type=radio group={scoops} value={1}>
+  One scoop
+</label>
+
+<label>
+  <input type=radio group={scoops} value={2}>
+  Two scoops
+</label>
+
+<label>
+  <input type=radio group={scoops} value={3}>
+  Three scoops
+</label>
+
+<h2>Flavours</h2>
+
+<label>
+  <input type=checkbox group={flavours} value="Cookies and cream">
+  Cookies and cream
+</label>
+
+<label>
+  <input type=checkbox group={flavours} value="Mint choc chip">
+  Mint choc chip
+</label>
+
+<label>
+  <input type=checkbox group={flavours} value="Raspberry ripple">
+  Raspberry ripple
+</label>
+
+{#if flavours.length === 0}
+  <p>Please select at least one flavour</p>
+{:else if flavours.length > scoops}
+  <p>Can't order more flavours than scoops!</p>
+{:else}
+  <p>
+  You ordered {scoops} {scoops === 1 ? 'scoop' : 'scoops'}
+  of {join(flavours)}
+  </p>
+{/if}
+
